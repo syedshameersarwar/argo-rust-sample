@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: argo-rust-sample
+spec:
+  selector:
+    matchLabels:
+      app: argo-rust-sample
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: argo-rust-sample
+    spec:
+      containers:
+        - name: argo-rust-sample
+          image: syedshameersarwar/argo-rust:test
+          ports:
+            - containerPort: 3030
+      imagePullSecrets:
+        - name: dockerhub-creds
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: argo-rust-sample-svc
+  labels:
+    app: argo-rust-sample-svc
+spec:
+  ports:
+  - port: 3030
+    protocol: TCP
+  selector:
+    app: argo-rust-sample
