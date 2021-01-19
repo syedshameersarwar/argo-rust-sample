@@ -15,6 +15,7 @@ spec:
       containers:
         - name: argo-rust-sample
           image: syedshameersarwar/argo-rust:test
+          imagePullPolicy: Always
           ports:
             - containerPort: 3030
       imagePullSecrets:
